@@ -35,9 +35,7 @@ jobs:
         dev-branch: develop
         
     - name: Set BUILD_VERSION
-      run: |
-        $version = "1.0.{0:#}" -f $($Env:GITHUB_RUN_NUMBER)
-        echo "BUILD_VERSION='${{ steps.version.outputs.version }}'" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+      run: echo "BUILD_VERSION=${{ steps.version.outputs.version }}" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
           
     - uses: NuGet/setup-nuget@v1.2.0
     - name: Setup .NET
