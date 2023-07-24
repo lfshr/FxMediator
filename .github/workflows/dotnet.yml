@@ -16,22 +16,6 @@ env:
   NuGetDirectory: ${{ github.workspace }}/nuget
   
 jobs:
-  gitversion:
-    runs-on: linux-latest
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
-      with:
-        ref: ${{ github.head_ref }}   # checkout the correct branch name
-        fetch-depth: 0  
-        
-    - name: Git Version
-      id: version
-      uses: codacy/git-version@2.7.1
-      with:
-        release-branch: main
-        dev-branch: develop
-    
   pack:
     runs-on: windows-latest
     steps:
