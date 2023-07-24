@@ -32,6 +32,6 @@ jobs:
       run: nuget restore
       working-directory: src
     - name: Pack Client
-      run: dotnet pack FxMediator.Client --configuration Release --output ${{ env.NuGetDirectory }}/client
+      run: dotnet pack FxMediator.Client/FxMediator.Client.csproj --configuration Release --output ${{ env.NuGetDirectory }}/client
       working-directory: src
       
