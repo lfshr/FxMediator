@@ -19,7 +19,7 @@ jobs:
   pack:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3 0 
+    - uses: actions/checkout@v3.5.3
     - name: Set BUILD_VERSION
       run: |
         $version = "1.0.{0:#}" -f $($Env:GITHUB_RUN_NUMBER)
