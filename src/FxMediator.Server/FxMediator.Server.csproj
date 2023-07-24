@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+        <AssemblyName>FxMediator.Server.net</AssemblyName>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <Compile Include="..\Shared\**\*.cs">
+            <Link>Shared\**\*</Link>
+        </Compile>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="CitizenFX.Core.Server" Version="1.0.6335" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Reference Include="Newtonsoft.Json">
+        <HintPath>..\Shared\Newtonsoft.Json.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>
