@@ -32,5 +32,6 @@ jobs:
       run: nuget restore
       working-directory: src
     - name: Pack Client
-      run: dotnet pack --project src/FxMediator.Client --output ${{ env.NuGetDirectory }}
+      run: dotnet pack FxMediator.Client --output ${{ env.NuGetDirectory }}
+      working-directory: src
       
