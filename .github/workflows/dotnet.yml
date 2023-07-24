@@ -19,12 +19,16 @@ jobs:
   pack:
     runs-on: windows-latest
     steps:
-    - uses: StanleyGoldman/setup-gitversion@v1.0.1
     - name: Checkout Code
       uses: actions/checkout@v3
       with:
         ref: ${{ github.head_ref }}   # checkout the correct branch name
         fetch-depth: 0 
+        
+    - name: Install GitVersion
+      uses: crazy-max/ghaction-chocolatey@v2
+      with:
+        args: install GitVersion -y
     
     - name: GitVersion
       id: version
