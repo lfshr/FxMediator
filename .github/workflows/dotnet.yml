@@ -10,21 +10,27 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: true
+  NuGetDirectory: ${{ github.workspace }}/nuget
+  
 jobs:
-  build:
+  pack:
 
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
+    - uses: NuGet/setup-nuget@v1.2.0
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 3.0.x
         
     - name: Restore dependencies
-      run: dotnet restore
+      run: nuget restore
       working-directory: src
-    - name: Build
-      run: dotnet build --no-restore
-      working-directory: src
+    - name: Pack Client
+      run: dotnet pack --project src/FxMediator.Client --output ${{ env.NuGetDirectory }}
+      
