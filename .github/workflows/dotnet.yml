@@ -33,7 +33,7 @@ jobs:
         uses: gittools/actions/gitversion/execute@v0.9.11
 
       - name: Pack Client (Release)
-        run: dotnet pack FxMediator.Client/FxMediator.Client.csproj --configuration Release --output ${{ env.NuGetDirectory }}/client /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }}
+        run: msbuild /p:Configuration=Release /p:PackageOutputPath=${{ env.NuGetDirectory }}/client /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }} /t:Pack FxMediator.Client/FxMediator.Client.csproj
         working-directory: src
 
       - name: Pack Server (Release)
