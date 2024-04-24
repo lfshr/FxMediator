@@ -16,7 +16,6 @@ env:
 
 jobs:
   release:
-    needs: pre-release
     runs-on: windows-latest
     environment: "Production"
     steps:
