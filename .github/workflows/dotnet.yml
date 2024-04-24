@@ -58,7 +58,7 @@ jobs:
         working-directory: src
 
       - name: Push Client to NuGet (Release)
-        run: nuget push ${{ env.NuGetDirectory }}/client/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }}
+        run: nuget push ${{ env.NuGetDirectory }}/client/*.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }}
 
       - name: Push Server to NuGet (Release)
         run: dotnet nuget push ${{ env.NuGetDirectory }}/server/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
