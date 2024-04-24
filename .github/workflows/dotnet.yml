@@ -32,6 +32,9 @@ jobs:
         id: gitversion
         uses: gittools/actions/gitversion/execute@v0.9.11
 
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.2
+
       - name: Pack Client (Release)
         run: msbuild /p:Configuration=Release /p:PackageOutputPath=${{ env.NuGetDirectory }}/client /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }} /t:Pack FxMediator.Client/FxMediator.Client.csproj
         working-directory: src
