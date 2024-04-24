@@ -66,9 +66,13 @@ jobs:
       - name: Push Server to NuGet (Release)
         run: dotnet nuget push ${{ env.NuGetDirectory }}\server\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
-      - name: Tag repository
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git tag -a v${{ steps.gitversion.outputs.NuGetVersionV2 }} -m "Release v${{ steps.gitversion.outputs.NuGetVersionV2 }}"
-          git push https://${{ secrets.GITHUB_PAT }}@github.com/lfshr/FxMediator.git --tags
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/v${{ steps.gitversion.outputs.NuGetVersionV2 }}',
+              sha: context.sha
+            })
