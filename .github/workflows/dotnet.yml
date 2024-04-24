@@ -32,11 +32,14 @@ jobs:
         id: gitversion
         uses: gittools/actions/gitversion/execute@v0.9.11
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Install Nuget
+        uses: nuget/setup-nuget@v2
+        with:
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+          nuget-version: "5.x"
 
       - name: Pack Client (Release)
-        run: msbuild /p:Configuration=Release /p:PackageOutputPath=${{ env.NuGetDirectory }}/client /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }} /t:Pack FxMediator.Client/FxMediator.Client.csproj
+        run: nuget pack FxMediator.Client/FxMediator.Client.csproj -Properties Configuration=Release -OutputDirectory ${{ env.NuGetDirectory }}/client -Version ${{ steps.gitversion.outputs.NuGetVersionV2 }}
         working-directory: src
 
       - name: Pack Server (Release)
