@@ -41,6 +41,9 @@ jobs:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
           nuget-version: "5.x"
 
+      - name: Restore Client
+        run: nuget restore src/FxMediator.Client/FxMediator.Client.csproj
+
       - name: Build Client (Release)
         run: msbuild /t:restore /t:build /p:Configuration=Release /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }} FxMediator.Client/FxMediator.Client.csproj
         working-directory: src
