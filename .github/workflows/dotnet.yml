@@ -35,8 +35,15 @@ jobs:
         run: dotnet pack FxMediator.Client/FxMediator.Client.csproj --configuration Release --output ${{ env.NuGetDirectory }}/client /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }}
         working-directory: src
 
-      - name: Push to NuGet (Release)
+      - name: Pack Server (Release)
+        run: dotnet pack FxMediator.Server/FxMediator.Server.csproj --configuration Release --output ${{ env.NuGetDirectory }}/server /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }}
+        working-directory: src
+
+      - name: Push Client to NuGet (Release)
         run: dotnet nuget push ${{ env.NuGetDirectory }}/client/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+
+      - name: Push Server to NuGet (Release)
+        run: dotnet nuget push ${{ env.NuGetDirectory }}/server/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
       - name: Tag repository
         run: |
