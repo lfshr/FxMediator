@@ -70,5 +70,5 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git tag ${{ steps.gitversion.outputs.SemVer }}
-          git push origin ${{ steps.gitversion.outputs.SemVer }}
+          git tag -a v${{ steps.gitversion.outputs.NuGetVersionV2 }} -m "Release v${{ steps.gitversion.outputs.NuGetVersionV2 }}"
+          git push https://x-access-token:${{ secrets.GITHUB_PAT }}@github.com/lfshr/FxMediator.git --tags
