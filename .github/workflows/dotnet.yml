@@ -46,22 +46,22 @@ jobs:
         working-directory: src
 
       - name: Build Client (Release)
-        run: msbuild /t:restore /t:build /p:Configuration=Release /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }} FxMediator.Client/FxMediator.Client.csproj
+        run: msbuild /t:restore /t:build /p:Configuration=Release /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }} FxMediator.Client\FxMediator.Client.csproj
         working-directory: src
 
       - name: Pack Client (Release)
-        run: nuget pack FxMediator.Client/FxMediator.Client.csproj -Properties Configuration=Release -OutputDirectory ${{ env.NuGetDirectory }}/client -Version ${{ steps.gitversion.outputs.NuGetVersionV2 }}
+        run: nuget pack FxMediator.Client\FxMediator.Client.csproj -Properties Configuration=Release -OutputDirectory ${{ env.NuGetDirectory }}\client -Version ${{ steps.gitversion.outputs.NuGetVersionV2 }}
         working-directory: src
 
       - name: Pack Server (Release)
-        run: dotnet pack FxMediator.Server/FxMediator.Server.csproj --configuration Release --output ${{ env.NuGetDirectory }}/server /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }}
+        run: dotnet pack FxMediator.Server\FxMediator.Server.csproj --configuration Release --output ${{ env.NuGetDirectory }}\server /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }}
         working-directory: src
 
       - name: Push Client to NuGet (Release)
-        run: nuget push ${{ env.NuGetDirectory }}/client/*.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
+        run: nuget push ${{ env.NuGetDirectory }}\client -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
 
       - name: Push Server to NuGet (Release)
-        run: dotnet nuget push ${{ env.NuGetDirectory }}/server/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ${{ env.NuGetDirectory }}\server\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
       - name: Tag repository
         run: |
