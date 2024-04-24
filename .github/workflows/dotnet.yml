@@ -57,6 +57,9 @@ jobs:
         run: dotnet pack FxMediator.Server\FxMediator.Server.csproj --configuration Release --output ${{ env.NuGetDirectory }}\server /p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }}
         working-directory: src
 
+      - name: List files in nuget\client directory
+        run: dir ${{ env.NuGetDirectory }}\client
+
       - name: Push Client to NuGet (Release)
         run: nuget push ${{ env.NuGetDirectory }}\client\*.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
 
