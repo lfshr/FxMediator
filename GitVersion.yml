@@ -17,7 +17,7 @@ branches:
     tag: alpha
     increment: Minor
   hotfix:
-    regex: hotfix(es)?[/-]
+    regex: (patch|hotfix(es)?)[/-]
     mode: ContinuousDeployment
     tag: beta
     increment: Patch
