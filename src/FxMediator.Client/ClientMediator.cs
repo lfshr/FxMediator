@@ -179,14 +179,8 @@ namespace FxMediator.Client
             //     }
             // }
         
-            EventHandlers[eventName] += new Func<string, string, Task>(async (requestId, payload) =>
+            EventHandlers[eventName] += new Func<string, Task>(async payload =>
             {
-                if (requestId != null)
-                {
-                    throw new FxMediatorException(
-                        $"EventHandler {eventName} expects a response but the payload type {payload.GetType().FullName} doesn't! This should never happen! See Fish!");
-                }
-
                 var obj = JsonConvert.DeserializeObject<TRequest>(payload);
                 await handler(obj);
             });
