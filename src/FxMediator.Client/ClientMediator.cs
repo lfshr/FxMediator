@@ -18,7 +18,7 @@ namespace FxMediator.Client
             var eventName = MediatorUtils.GetEventNameForType<TRequest>();
             var payload = JsonConvert.SerializeObject(request);
 
-            TriggerServerEvent(eventName, null, payload);
+            TriggerServerEvent(eventName, payload);
         }
 
         
