@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,12 +9,6 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <Compile Include="..\Shared\**\*.cs">
-            <Link>Shared\**\*</Link>
-        </Compile>
-    </ItemGroup>
-    
-    <ItemGroup>
       <PackageReference Include="CitizenFX.Core.Server" Version="1.0.6335" />
       <PackageReference Include="NuGet.Build.Tasks.Pack" Version="6.6.1">
         <PrivateAssets>all</PrivateAssets>
@@ -23,8 +17,12 @@
     </ItemGroup>
     
     <ItemGroup>
+      <ProjectReference Include="..\FxMediator.Shared\FxMediator.Shared.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
       <Reference Include="Newtonsoft.Json">
-        <HintPath>..\Shared\Newtonsoft.Json.dll</HintPath>
+        <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
       </Reference>
     </ItemGroup>
 

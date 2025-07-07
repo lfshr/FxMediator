@@ -1,91 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B7DEA23D-07D4-4AE3-9D15-FFBCCFEB061E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FxMediator.Client</RootNamespace>
+    <AssemblyName>FxMediator.Client.net</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Version Condition="'$(BUILD_VERSION)' == ''">1.0.0-dev</Version>
+    <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CitizenFX.Core.Client, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CitizenFX.Core.Client.1.0.6370\lib\net45\CitizenFX.Core.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClientMediator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FxMediator.Shared\FxMediator.Shared.csproj">
+      <Project>{80124874-16d5-489b-a1bd-c9f1ee232ae0}</Project>
+      <Name>FxMediator.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  
+  <!--<Import Project="..\..\..\..\first-responders-server\FirstResponders\Test\packages\NuGet.Build.Tasks.Pack.6.6.1\build\NuGet.Build.Tasks.Pack.targets" Condition="Exists('..\..\..\..\first-responders-server\FirstResponders\Test\packages\NuGet.Build.Tasks.Pack.6.6.1\build\NuGet.Build.Tasks.Pack.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{B7DEA23D-07D4-4AE3-9D15-FFBCCFEB061E}</ProjectGuid>
-        <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>FxMediator.Client</RootNamespace>
-        <AssemblyName>FxMediator.Client.net</AssemblyName>
-        <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-        <Version Condition="'$(BUILD_VERSION)' == ''">1.0.0-dev</Version>
-        <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="CitizenFX.Core.Client, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\CitizenFX.Core.Client.1.0.6370\lib\net45\CitizenFX.Core.Client.dll</HintPath>
-        </Reference>
-        <Reference Include="Newtonsoft.Json">
-          <HintPath>..\Shared\Newtonsoft.Json.dll</HintPath>
-        </Reference>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Data" />
-        <Reference Include="System.Xml" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="ClientMediator.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="../Shared/**/*.cs" />
-        <Compile Update="..\Shared\IBaseRequest.cs">
-          <Link>Shared\IBaseRequest.cs</Link>
-        </Compile>
-        <Compile Update="..\Shared\IServerRequest.cs">
-          <Link>Shared\IServerRequest.cs</Link>
-        </Compile>
-        <Compile Update="..\Shared\INotification.cs">
-          <Link>Shared\INotification.cs</Link>
-        </Compile>
-        <Compile Update="..\Shared\MediatorUtils.cs">
-          <Link>Shared\MediatorUtils.cs</Link>
-        </Compile>
-        <Compile Update="..\Shared\FxMediatorException.cs">
-          <Link>Shared\FxMediatorException.cs</Link>
-        </Compile>
-        <Compile Update="..\Shared\Test.cs">
-          <Link>Shared\Test.cs</Link>
-        </Compile>
-    </ItemGroup>
-    <ItemGroup>
-      <None Include="packages.config" />
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <Import Project="..\..\..\..\first-responders-server\FirstResponders\Test\packages\NuGet.Build.Tasks.Pack.6.6.1\build\NuGet.Build.Tasks.Pack.targets" Condition="Exists('..\..\..\..\first-responders-server\FirstResponders\Test\packages\NuGet.Build.Tasks.Pack.6.6.1\build\NuGet.Build.Tasks.Pack.targets')" />
-    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-      <PropertyGroup>
-        <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
-      </PropertyGroup>
-      <Error Condition="!Exists('..\..\..\..\first-responders-server\FirstResponders\Test\packages\NuGet.Build.Tasks.Pack.6.6.1\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\first-responders-server\FirstResponders\Test\packages\NuGet.Build.Tasks.Pack.6.6.1\build\NuGet.Build.Tasks.Pack.targets'))" />
-    </Target>
-    <Target Name="Pack" />
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+    <Error Condition="!Exists('..\..\..\..\first-responders-server\FirstResponders\Test\packages\NuGet.Build.Tasks.Pack.6.6.1\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\first-responders-server\FirstResponders\Test\packages\NuGet.Build.Tasks.Pack.6.6.1\build\NuGet.Build.Tasks.Pack.targets'))" />
+  </Target>
+  <Target Name="Pack" />-->
+  
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">
     </Target>
     <Target Name="AfterBuild">
     </Target>
     -->
-
 </Project>
